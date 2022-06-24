@@ -11,7 +11,7 @@ export class Password {
     return `${buffer.toString("hex")}.${salt}`;
   }
 
-  static async comparte(storedPassword: string, suppliedPassword: string) {
+  static async compare(storedPassword: string, suppliedPassword: string) {
     const [hashedPassword, salt] = storedPassword.split(".");
     const buffer = (await scryptSync(suppliedPassword, salt, 64)) as Buffer;
 
