@@ -1,21 +1,20 @@
-import express, { Request, Response } from "express";
-import { body } from "express-validator";
-import { BadRequestError } from "../errors/bad-request-error";
-import { validateRequest } from "../middlewares/validate-request";
-import { User } from "../models/user";
-import { setJwtSession } from "../utilities/jwtSession";
-import { Password } from "../utilities/password";
+import express, { Request, Response } from 'express';
+import { body } from 'express-validator';
+import { BadRequestError, validateRequest } from '@ms-ticket/common';
+import { User } from '../models/user';
+import { setJwtSession } from '../utilities/jwtSession';
+import { Password } from '../utilities/password';
 
 const router = express.Router();
 
 router.post(
-  "/api/users/signin",
+  '/api/users/signin',
   [
-    body("email").isEmail().withMessage("Email must be valid"),
-    body("password")
+    body('email').isEmail().withMessage('Email must be valid'),
+    body('password')
       .trim()
       .notEmpty()
-      .withMessage("You must provide a password"),
+      .withMessage('You must provide a password'),
   ],
   validateRequest,
   async (req: Request, res: Response) => {
@@ -24,7 +23,7 @@ router.post(
     const existingUser = await User.findOne({ email });
 
     if (!existingUser) {
-      throw new BadRequestError("Invalid credentials");
+      throw new BadRequestError('Invalid credentials');
     }
 
     const passwordMatch = await Password.compare(
@@ -33,7 +32,7 @@ router.post(
     );
 
     if (!passwordMatch) {
-      throw new BadRequestError("Invalid credentials");
+      throw new BadRequestError('Invalid credentials');
     }
 
     setJwtSession(req, existingUser);

@@ -1,11 +1,10 @@
-import express, { Request, Response } from "express";
-import { currentUser } from "../middlewares/current-user";
-import { requireAuth } from "../middlewares/require-auth";
+import express, { Request, Response } from 'express';
+import { currentUser, requireAuth } from '@ms-ticket/common';
 
 const router = express.Router();
 
 router.get(
-  "/api/users/currentuser",
+  '/api/users/currentuser',
   currentUser,
   requireAuth,
   (req: Request, res: Response) => {
