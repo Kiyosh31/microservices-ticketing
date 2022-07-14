@@ -1,11 +1,11 @@
-import { MongoMemoryServer } from "mongodb-memory-server";
-import mongoose from "mongoose";
-import { beforeAll, beforeEach, afterAll } from "@jest/globals";
-import { app } from "../app";
+import { MongoMemoryServer } from 'mongodb-memory-server';
+import mongoose from 'mongoose';
+import { beforeAll, beforeEach, afterAll } from '@jest/globals';
+import { app } from '../app';
 
 let mongo: any;
 beforeAll(async () => {
-  process.env.JWT_KEY = "asdfasdf";
+  process.env.JWT_KEY = 'asdfasdf';
 
   mongo = await MongoMemoryServer.create();
   const mongoUri = mongo.getUri();

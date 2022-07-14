@@ -3,10 +3,10 @@ import { json } from 'body-parser';
 import 'express-async-errors';
 import cookieSession from 'cookie-session';
 
-// import { currentUserRouter } from './routes/current-user';
-// import { signinRouter } from './routes/signin';
-// import { signupRouter } from './routes/signup';
-// import { signoutRouter } from './routes/signout';
+import { createTicketRouter } from './routes/new';
+import { showTicketRouter } from './routes/show';
+import { updateTicketRouter } from './routes/update';
+import { indexTicketRouter } from './routes/index';
 
 import { errorHandler, NotFoundError } from '@ms-ticket/common';
 
@@ -20,10 +20,10 @@ app.use(
   })
 );
 
-// app.use(currentUserRouter);
-// app.use(signinRouter);
-// app.use(signupRouter);
-// app.use(signoutRouter);
+app.use(createTicketRouter);
+app.use(showTicketRouter);
+app.use(updateTicketRouter);
+app.use(indexTicketRouter);
 
 app.get('*', () => {
   throw new NotFoundError();

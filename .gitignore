@@ -4,3 +4,5 @@ vscode
 *.tar
 
 .next
+common
+nats-test
