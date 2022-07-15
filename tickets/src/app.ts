@@ -8,7 +8,7 @@ import { showTicketRouter } from './routes/show';
 import { updateTicketRouter } from './routes/update';
 import { indexTicketRouter } from './routes/index';
 
-import { errorHandler, NotFoundError } from '@ms-ticket/common';
+import { errorHandler, NotFoundError, currentUser } from '@ms-ticket/common';
 
 const app = express();
 app.set('trust proxy', true);
@@ -19,6 +19,7 @@ app.use(
     secure: true,
   })
 );
+app.use(currentUser);
 
 app.use(createTicketRouter);
 app.use(showTicketRouter);

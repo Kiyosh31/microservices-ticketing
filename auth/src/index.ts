@@ -1,8 +1,6 @@
 import mongoose from 'mongoose';
 import { app } from './app';
 
-const authPort = 3000;
-
 const start = async () => {
   if (!process.env.JWT_KEY) {
     throw new Error('JWT_KEY must be defined');
@@ -10,6 +8,10 @@ const start = async () => {
 
   if (!process.env.MONGO_URI) {
     throw new Error('MONGO_URI must be defined');
+  }
+
+  if (!process.env.START_PORT) {
+    throw new Error('START_PORT must be defined');
   }
 
   try {
@@ -20,8 +22,8 @@ const start = async () => {
   }
 };
 
-app.listen(authPort, () => {
-  console.log(`Listening on port ${authPort}!!!`);
+app.listen(process.env.START_PORT, () => {
+  console.log(`Listening on port ${process.env.START_PORT}!!!`);
 });
 
 start();
